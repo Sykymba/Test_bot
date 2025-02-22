@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "sykymba-bot",
+  "private_key_id": "5e9a3d0db3dfb7c4b9331c68c8b523c8af2159d2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQD1jjMA1DtWU6/H\ndbiIPhf24Gf2fItQ4WOrObpsQRw7N3lD6Sc/yC/XKGkh4Z9ZbnHgLS1iA2RKJvDQ\nzp3Qz0StKvh6cCL7AzO8ackYVJgNrlyKpl6hVnVqCvOQ4pjNFRdcrSyZq8W+yn8Q\nwsCJkxm99dIhmLy284hUgItg3evgPsvSFD4wY2W4bVc81wuYm/+GGp62qm7hwpRT\ntM/uKCXVws9eGVBEWRUP4fgFEHXkToHgBtbajGuKnJndtmmjaXWopMqOU4vKbTUg\nBoyuWZJJbNT6AEqlmkoxs7NR+AFl9HQpzPF7uH+7EhV5nhdm5QRtBc+KmESRWQ3q\nNL5CSSSpAgMBAAECggEAHzsjbYWQuR1ntpytswECwe7aCireT+klaLpXkDvaarBW\n3LZOEaSqa65uFgBrk0+iws+8J+0lLPE1oQ5xBVp3R6G20gu/xzZ/DAWrAqHaZ6hi\nM22O4kJBfhKVK+ZGEj9j0Ju4l8rrGaWznN7IPOHYB6W463ZQ+jaQg6mIZfI+dS9d\nAI9SxtNSbk+w0yUa6qqVCufvz4b+RoSbsIVTLSnDS+7vSecebSLoBpcWJrcpUreI\nkLmhAX9kM+z62bVAuBA498VFC+MAJ2FDnJF6HfhdkNU8YU36GqoBRIZeCi7THb3v\nWNb0SkEuS4G+dJAtFx8r12pM+8IQUA8oYc8MFoeqaQKBgQD+CAkFBZeaNavFjtCt\nMEHHnHVzOay4FYbPSOyb5sva/pBMAPflMNVD/0IMczg1cmIr7Jm+2EO9dIsPG9nN\nZoIcMqRF9L7ZrPZE28Cj4CW7OOw5cVwG3Khf6VOeRCB5YBNRLfYYegfa7q653zIk\nAJDT/9ZaYv+4Io+DJXswvTX3YwKBgQD3dVlQsD/pWq7CLhlD8LtcdLkMtc4i0aHa\nI0Jy5ItkMra+okhpx0lDX1E2L99Axr7h85q9sx1yIroMciDsLFS3VuSgVCC+fadp\n35WJU5+yVhfR26g8EQ4MztNxJ5Kx9YIOz/4qhZDZeuqjTCq/jtIPlkEIks/udrT4\nteCfWJxPgwKBgBcRJbiGBHklTH649Cv1yNNWWrfm0c85bS9fYNTbRUGSggnUwK3Y\nHFV7VUUKJV19EHsKlf9lZelLLuFlVwa2uzPSSWZszfO4J/iit8BptyNkDNc+euvI\nl6V163jgmM5MshRaBxG76wCvUcBhCw2H257UiWNVwAC5aqyu95u6Yq8fAoGBAPEp\nBwMQ0Shc/OU2wd6pdB71jgYqBBuAy0hohnCr9ICQv/Hm+8VCt06WTPIPE3bwecSA\ngPSQ44iA+Wn5q8Yeqe0HHMZ3VnXuxUHz6KqtuXu2VX5qoHjxcgzfX8bt9xPBnJ9M\n6nmMM48PMC42o46N5H/WQcjWMxhFzbZ4odEJLUR7AoGBAL8PBNwyNFKptbneaGDG\njVlBQF3exIF8/4T2Y1Yqs2Ur78iSlZOo4EVZk3jGeJV7yFzY6SII5CuGaWUI5rH4\nG98kfBmcsRqKYuBMHsP9aq5pi+yscK7ofWvY6NVJrpmLgIVOHb08o8ESKdOiOuQr\naiYxpAo4sBNvVqxYu/GZEwIZ\n-----END PRIVATE KEY-----\n",
+  "client_email": "sykymba@sykymba-bot.iam.gserviceaccount.com",
+  "client_id": "115095885221742196126",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sykymba%40sykymba-bot.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
