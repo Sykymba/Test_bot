@@ -2,39 +2,59 @@ import gspread
 from gspread import Client, Spreadsheet, Worksheet
 from typing import List, Dict
 from collections import Counter
+from datetime import datetime, timedelta
 
+SPREADHEET_URL_TWO = 'https://docs.google.com/spreadsheets/d/1CgCxgHhJj0zAwJocjJ200QFCansuJGOuQtp2P3W5_uY/edit?gid=390177914#gid=390177914'
 
-
-SPREADHEET_URL_TWO = 'https://docs.google.com/spreadsheets/d/1P5ZgCDnWUL_v8KV7QLxJ_Vn872ZlfWsb4J1HLfVsrTo/edit?usp=sharing'
-
-def group_string(win: Dict) -> Dict:
+def group_string(win: dict) -> Dict:
     " Функция формирует новый словарь и отбрасывает ненужные данные "
-    new_win: Dict = dict()
-    win.pop(None)
+    new: Dict = dict()
     for k, v in win.items():
         if k.startswith('бывший штат'):
-            if 'Бывший штат' in new_win:
-                new_win['Бывший штат'] += 1
+            if 'Бывший штат' in new:
+                new['Бывший штат'] += 1
             else:
-                new_win['Бывший штат'] = 1
+                new['Бывший штат'] = 1
         else:
-            new_win[k] = v
-    return new_win
+            new[k] = v
+    return new
+#
 
-
-def data_control(table_date: List, data: str) -> bool:
+def data_control(table_date: str, data) -> bool:
     " Функция сравнивает дату в таблице с акктуальной "
-    for i in table_date:
-        if data == i[:8]:
+    control = table_date.split()
+    try:
+        if control[0] == data:
             return True
+    except:
+        return False
+
+def processing(my_list, min_index, max_index, count, data, err_data, name):
+    for i in my_list[1]:
+        if i == '':
+            if data_control(my_list[0][count], data):
+                if min_index == 0:
+                    min_index = count
+            elif data_control(my_list[0][count], err_data.strftime('%d.%m.%Y')):
+                max_index = count
+                break
+        count += 1
 
 
-def counting(min_i: int, max_i: int, ws: Worksheet) -> Dict:
-    win: List = []
-    for i in range(min_i + 1, max_i):
-        win.append(ws.cell(i, 10).value) # Добавляем все значения из столбца между min/max индексом
-    new_win: Dict = group_string(win=Counter(win))
-    return new_win
+    win_dict: dict = dict(Counter([i
+        for i in my_list[1][min_index:max_index]
+                       if i != ''
+    ]))
+
+    new_win = group_string(win=win_dict)
+
+    return (
+            f'{name} на {data}\n'
+            f'    -OK: {new_win.get('ок', 0)}\n    -Бывший штат: {new_win.get('Бывший штат', 0)}\n'
+            f'    -Отказ: {new_win.get('отказ', 0)}\n    -Отказ АУТ: {new_win.get('отказ аутсорс', 0)}\n'
+            f'    -Курьер: {new_win.get('действующий курьер', 0)}'
+    )
+
 
 
 def main():
@@ -45,29 +65,54 @@ def main():
     """
     gc: Client = gspread.service_account('./acount_server.json')
     sh: Spreadsheet = gc.open_by_url(SPREADHEET_URL_TWO)
-    ws: Worksheet = sh.worksheet('Лист7')
+    ws: Worksheet = sh.worksheet('Проверки СБ')
 
+    name = 'Масс подбор'
+    name2 = 'Точечный подбор'
     min_index: int = 0
     max_index: int = 0
-    data: str = '18.02.25'
+    data: str = datetime.now().strftime("%d.%m.%Y")
+    err_data = datetime.now() + timedelta(days=1)
     count: int = 0
+    my_list: List = [ws.col_values(1), ws.col_values(2)]
+    my_list2: List = [ws.col_values(3), ws.col_values(4)]
 
-    for i in ws.col_values(10):
-        count += 1
-        if i == '' and count > 5:
-            if data_control(table_date=ws.row_values(count), data=data): # Проверяем дату на свопадение с текущей
-                if min_index == 0:
-                    min_index = count
-            else:
-                max_index = count
-                continue
-    new_win: Dict = counting(min_i=min_index, max_i=max_index, ws=ws)
-    return (
-            f'Масс подбор на {data}\n'
-            f'    -OK: {new_win.get('ок', 0)}\n    -Бывший штат: {new_win.get('Бывший штат')}\n'
-            f'    -Отказ: {new_win.get('отказ', 0)}\n    -Отказ АУТ: {new_win.get('отказ аутсорс', 0)}'
-    )
+
+    result = processing(my_list=my_list, min_index=min_index, max_index=max_index,data=data, err_data=err_data, count=count, name=name)
+    result2 = processing(my_list=my_list2, min_index=min_index, max_index=max_index,data=data, err_data=err_data, count=count, name=name2)
+    finish = result + '\n\n' + result2
+    return finish
+
 
 
 if __name__ == '__main__':
     main()
+
+
+
+
+
+    # for i in my_list[1]:
+    #     if i == '':
+    #         if data_control(my_list[0][count], data):
+    #             if min_index == 0:
+    #                 min_index = count
+    #         elif data_control(my_list[0][count], err_data.strftime('%d.%m.%Y')):
+    #             max_index = count
+    #             break
+    #     count += 1
+    #
+    #
+    # win_dict: dict = dict(Counter([i
+    #     for i in my_list[1][min_index:max_index]
+    #                    if i != ''
+    # ]))
+    #
+    # new_win = group_string(win=win_dict)
+    #
+    # print(
+    #         f'Масс подбор на {data}\n'
+    #         f'    -OK: {new_win.get('ок', 0)}\n    -Бывший штат: {new_win.get('Бывший штат', 0)}\n'
+    #         f'    -Отказ: {new_win.get('отказ', 0)}\n    -Отказ АУТ: {new_win.get('отказ аутсорс', 0)}\n'
+    #         f'    -Курьер: {new_win.get('действующий курьер', 0)}'
+    # )
