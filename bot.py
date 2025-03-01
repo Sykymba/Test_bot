@@ -16,14 +16,13 @@ class Bot:
             while True:
                 time.sleep(60)
                 current_data = datetime.now() # актуальная дата и время
-                if current_data.hour == 16 and current_data.minute == 15:
+                if current_data.hour == 9 and current_data.minute == 0:
                     self.__bot.send_message(self.__chat_id, sheets.main())
-                if current_data.hour == 16 and current_data.minute == 20:
+                if current_data.hour == 9 and current_data.minute == 5:
                     self.__bot.send_message(self.__chat_id, sheets_two.main())
         except Exception as exc:
-            print(
-                exc
-            )
+            self.__bot.send_message(self.__chat_id, f'ошибка: {exc}!!!!!! нужна помощь')
+
 
 if __name__ == '__main__':
     print('go script!!!')
